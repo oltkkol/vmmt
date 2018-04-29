@@ -68,20 +68,36 @@ model.compile(loss='categorical_crossentropy',
 model.fit(train_x, 
         train_y, 
         validation_data=(test_x, test_y), 
-        epochs=5, 
+        epochs=35, 
         batch_size=1024,
         callbacks=[plot_losses])
 
-# (5) Try some
-def test_example(index):
-	probs = model.predict(np.array( [train_x[index]] ))
-	yHat = np.argmax( probs )
 
-	plt.matshow( x_train[index], cmap="gray" )
-	plt.show()
+# (5) All evaluation
+from sklearn.metrics import classification_report
 
-	print("Target: ", y_train[index], "... Neural network says: ", yHat)
+def print_eval(x, y, title):
+    yHat = model.predict_classes(x, batch_size=128, verbose=1)
+    report = classification_report(np.argmax(y, axis=1), yHat)
+    print("\n\nREPORT ", title, "\n", report)
 
-test_example(0)
-test_example(1)
-test_example(2)
+print_eval(train_x, train_y, "Train")
+print_eval(test_x, test_y, "Test")
+
+# (6) Try some random examples from train dataset
+import random
+
+def test_random_example():
+    index = random.randint(0, len(train_x))
+    y = y_train[index]
+    yHat = model.predict_classes(np.array( [train_x[index]] ), verbose=0)[0]
+
+    plt.matshow( x_train[index], cmap="gray" )
+    plt.show()
+
+    print("Target: ", y, "... NN: ", yHat)
+    print("... OK" if y == yHat else "... WRONG" )
+
+test_random_example()
+test_random_example()
+test_random_example()
