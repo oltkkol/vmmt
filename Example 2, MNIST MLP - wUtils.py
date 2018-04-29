@@ -2,7 +2,6 @@ import keras
 import numpy as np
 import matplotlib.pyplot as plt
 from keras.datasets import mnist
-from matplotlib import pyplot as plt
 from IPython.display import clear_output
 
 # PLOTTER 
