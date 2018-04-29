@@ -5,7 +5,7 @@ from keras.datasets import mnist
 # Load MNIST
 (x_train, y_train), (x_test, y_test) = mnist.load_data()
 
-# Scale and Flatten
+# (1) Scale and Flatten
 train_x = []
 test_x = []
 
@@ -18,7 +18,7 @@ for example in x_train:
 for example in x_test:
 	test_x.append( scale_and_flatten(example) )
 
-# Target labels to one-hot
+# (2) Target labels to one-hot
 # Eg. 0 to [1, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 train_y = []
@@ -36,7 +36,7 @@ for target in y_train:
 for target in y_test:
 	test_y.append( target_to_onehot(target) )
 
-# To np.array
+# (3) To np.array
 
 train_x = np.array(train_x)
 train_y = np.array(train_y)
@@ -44,7 +44,7 @@ train_y = np.array(train_y)
 test_x = np.array(test_x)
 test_y = np.array(test_y)
 
-# NN
+# (4) NN
 from keras.models import Sequential
 from keras.layers import Dense, Dropout
 
