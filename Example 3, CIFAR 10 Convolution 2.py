@@ -29,7 +29,6 @@ test_y = keras.utils.to_categorical(y_test.flatten(), number_of_classes)
 # (3) Define helpful plotters
 ###############################################################################
 
-
 class PlotLosses(keras.callbacks.Callback):
     def on_train_begin(self, logs={}):
         self.i = 0
@@ -91,7 +90,7 @@ plot_images = PlotImages()
 # (4) NN
 ###############################################################################
 
-# MODEL: 83.2 % @ 350 epoch, parameters: 319k
+# MODEL: 84.2 % @ 350 epoch, parameters: 319k
 regL2 = regularizers.l2(0.0000001)
 
 model = Sequential()
@@ -110,6 +109,7 @@ model.add( Dropout(0.5) )
 model.add( Flatten() )
 model.add( Dense(number_of_classes, activation='softmax') )
 
+###############################################################################
 
 model.compile(loss='categorical_crossentropy',
               optimizer='adam',
