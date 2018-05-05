@@ -91,28 +91,28 @@ plot_images = PlotImages()
 # (4) NN
 ###############################################################################
 
-# MODEL: 83.2 % @ 400 epoch, parameters: 319k
+# MODEL: 83.2 % @ 350 epoch, parameters: 319k
 regL2 = regularizers.l2(0.0000001)
 
 model = Sequential()
 model.add( Conv2D(128, (3, 3), padding='same', activation="relu", activity_regularizer=regL2, input_shape=train_x.shape[1:]) )
-model.add(MaxPooling2D(pool_size=(2, 2)))
-model.add(Dropout(0.5))
+model.add( MaxPooling2D(pool_size=(2, 2)) )
+model.add( Dropout(0.5) )
 
-model.add( Conv2D(128, (3, 3), padding='same', activation="relu", activity_regularizer=regL2, input_shape=train_x.shape[1:]) )
-model.add(MaxPooling2D(pool_size=(2, 2)))
-model.add(Dropout(0.5))
+model.add( Conv2D(128, (3, 3), padding='same', activation="relu", activity_regularizer=regL2 ) )
+model.add( MaxPooling2D(pool_size=(2, 2)) )
+model.add( Dropout(0.5) )
 
-model.add( Conv2D(128, (3, 3), padding='same', activation="relu", activity_regularizer=regL2, input_shape=train_x.shape[1:]) )
-model.add(MaxPooling2D(pool_size=(2, 2)))
-model.add(Dropout(0.5))
+model.add( Conv2D(128, (3, 3), padding='same', activation="relu", activity_regularizer=regL2) )
+model.add( MaxPooling2D(pool_size=(2, 2)) )
+model.add( Dropout(0.5) )
 
 model.add( Flatten() )
 model.add( Dense(number_of_classes, activation='softmax') )
 
 
 model.compile(loss='categorical_crossentropy',
-              optimizer='rmsprop',
+              optimizer='adam',
               metrics=['accuracy'])
 
 model.summary()
