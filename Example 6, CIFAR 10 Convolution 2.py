@@ -83,7 +83,6 @@ class PlotImages(keras.callbacks.Callback):
 
         plt.show()
 
-
 plot_losses = PlotLosses()
 plot_images = PlotImages()
 
